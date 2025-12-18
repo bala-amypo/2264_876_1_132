@@ -7,6 +7,13 @@ package com.example.demo.controller;
 public class UserProfileController{
 
 
-    public class(Userprofile )
+    public class UserProfile(){
+
+
+        @PostMapping("/users")
+        public UserProfile createData(@RequestBody UserProfile usp){
+            return ser.createData(usp);
+        }
+    }
 
 }

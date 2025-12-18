@@ -1,10 +1,10 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*
+import jakarta.persistence.*;
 
 @Entity
 
-public class UserProfile{
+public class UserProfile(){
     private Long id;
     private String username;
     private String email;
@@ -68,4 +68,5 @@ public class UserProfile{
 
     }
     
+}
 }

@@ -52,6 +52,5 @@ public class UserProfile{
     public Timestamp getUpdateat(){
         return updateat;
     }
-    public void setCreateat(Timestamp createat){
-        this.createat=createat;
+    
 }

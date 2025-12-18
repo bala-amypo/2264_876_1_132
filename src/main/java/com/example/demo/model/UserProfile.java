@@ -52,5 +52,12 @@ public class UserProfile{
     public Timestamp getUpdateat(){
         return updateat;
     }
+    public void setUpdateat(Timestamp updateat){
+        this.updateat=updateat;
+    }
+    public UserProfile(Long id,String username,String email,String bio,Boolean active,Timestamp createat,Timestamp updateat){
+        this.id=id;
+        this.
+    }
     
 }

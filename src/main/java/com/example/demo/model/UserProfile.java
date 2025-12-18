@@ -31,4 +31,13 @@ public class UserProfile{
     public void setEmail(String email){
         this.email=email;
     }
+    public String getBio(){
+        return bio;
+    }
+    public void setEmail(String bio){
+        this.bio=bio;
+    }
+    public Boolean getActive(){
+        return active;
+    }
 }

@@ -40,4 +40,15 @@ public class UserProfile{
     public Boolean getActive(){
         return active;
     }
+    public void setActive(Boolean active){
+        this.active=active;
+    }
+    public Timestamp getCreateat(){
+        return createat;
+    }
+    public void setCreateat(Timestamp createat){
+        this.createat=createat;
+    }
+    public Timestamp getUpdateat(){
+        return createat;
 }

@@ -1,10 +1,11 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*
 
-
-
+@Entity
 
 public class UserProfile{
+    
     private Long id;
     private String username;
     private String email;
@@ -57,7 +58,15 @@ public class UserProfile{
     }
     public UserProfile(Long id,String username,String email,String bio,Boolean active,Timestamp createat,Timestamp updateat){
         this.id=id;
-        this.
+        this.username=username;
+        this.email=email;
+        this.bio=bio;
+        this.active=active;
+        this.createat=createat;
+        this.updateat=updateat;
+    }
+    public UserProfile(){
+
     }
     
 }

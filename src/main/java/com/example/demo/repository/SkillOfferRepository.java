@@ -1,6 +1,6 @@
 package com.example.barter.repository;
 
-import com.example.demo.model.SkillOffer;
+import com.example.barter.model.SkillOffer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

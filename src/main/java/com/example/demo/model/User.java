@@ -77,4 +77,68 @@ public class User {
         }
     }
 
-    // -------------------- Getters & Setters -----
+    // -------------------- Getters & Setters --------------------
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // password must be HASHED before setting (handled in service)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        if (!role.equals("ADMIN") && !role.equals("USER")) {
+            throw new IllegalArgumentException("Invalid role");
+        }
+        this.role = role;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        if (rating < 0.0 || rating > 5.0) {
+            throw new IllegalArgumentException("Rating must be between 0 and 5");
+        }
+        this.rating = rating;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+}

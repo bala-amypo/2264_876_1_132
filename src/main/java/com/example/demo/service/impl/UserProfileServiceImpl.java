@@ -22,7 +22,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfile getUserById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("UserProfile not found"));
-    }
+    } 
 
     public List<UserProfile> getAllUsers() {
         return repository.findAll();

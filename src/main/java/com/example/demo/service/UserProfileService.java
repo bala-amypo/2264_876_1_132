@@ -1,15 +1,11 @@
 package com.example.demo.service;
 
-import java.util.List;
 import com.example.demo.model.UserProfile;
+import java.util.List;
 
 public interface UserProfileService {
 
-    UserProfile createUser(UserProfile user);
+    UserProfile get(Long id);
 
-    UserProfile getUserById(Long id);
-
-    List<UserProfile> getAllUsers();
-
-    void deactivateUser(Long id);
+    List<UserProfile> list();
 }

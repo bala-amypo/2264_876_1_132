@@ -13,7 +13,7 @@ public class User {
 
     private String fullName;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
@@ -21,6 +21,16 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public User() {}
+
+    public User(Long id, String fullName, String email,
+                String password, String role, LocalDateTime createdAt) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

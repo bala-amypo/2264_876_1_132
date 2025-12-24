@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "skill_requests")
 public class SkillRequest {
 
     @Id
@@ -19,6 +20,15 @@ public class SkillRequest {
     private Boolean active = true;
 
     public SkillRequest() {}
+
+    public SkillRequest(Long id, UserProfile user, Skill skill,
+                        String urgencyLevel, Boolean active) {
+        this.id = id;
+        this.user = user;
+        this.skill = skill;
+        this.urgencyLevel = urgencyLevel;
+        this.active = active;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

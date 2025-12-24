@@ -3,13 +3,14 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "skills")
 public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
     private String category;
@@ -17,6 +18,15 @@ public class Skill {
     private Boolean active = true;
 
     public Skill() {}
+
+    public Skill(Long id, String name, String category,
+                 String description, Boolean active) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.active = active;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

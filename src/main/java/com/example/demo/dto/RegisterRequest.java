@@ -6,8 +6,18 @@ public class RegisterRequest {
     private String email;
     private String password;
 
-    public RegisterRequest() {}
+    // No-args constructor
+    public RegisterRequest() {
+    }
 
+    // All-args constructor
+    public RegisterRequest(String fullName, String email, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
+
+    // Getters & Setters
     public String getFullName() {
         return fullName;
     }

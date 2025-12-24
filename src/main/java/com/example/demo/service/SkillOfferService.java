@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import java.util.List;
 import com.example.demo.model.SkillOffer;
+import java.util.List;
 
 public interface SkillOfferService {
 
@@ -12,4 +12,6 @@ public interface SkillOfferService {
     SkillOffer getOfferById(Long id);
 
     List<SkillOffer> getOffersByUser(Long userId);
+
+    void deactivateOffer(Long id);
 }

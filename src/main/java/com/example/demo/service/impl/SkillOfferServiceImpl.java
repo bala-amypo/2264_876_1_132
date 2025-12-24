@@ -1,11 +1,3 @@
-package com.example.demo.service.impl;
-
-import org.springframework.stereotype.Service;
-import java.util.List;
-import com.example.demo.model.SkillOffer;
-import com.example.demo.repository.SkillOfferRepository;
-import com.example.demo.service.SkillOfferService;
-
 @Service
 public class SkillOfferServiceImpl implements SkillOfferService {
 
@@ -15,21 +7,33 @@ public class SkillOfferServiceImpl implements SkillOfferService {
         this.repository = repository;
     }
 
+    @Override
     public SkillOffer createOffer(SkillOffer offer) {
         return repository.save(offer);
     }
 
+    @Override
     public SkillOffer updateOffer(Long id, SkillOffer offer) {
-        offer.setId(id);
-        return repository.save(offer);
+        SkillOffer existing = getOfferById(id);
+        existing.setExperienceLevel(offer.getExperienceLevel());
+        return repository.save(existing);
     }
 
+    @Override
     public SkillOffer getOfferById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("SkillOffer not found"));
+                .orElseThrow(() -> new RuntimeException("Offer not found"));
     }
 
+    @Override
     public List<SkillOffer> getOffersByUser(Long userId) {
-        return repository.findByUserId(userId);
+        return repository.findAll();
+    }
+
+    @Override
+    public void deactivateOffer(Long id) {
+        SkillOffer offer = getOfferById(id);
+        offer.setActive(false);
+        repository.save(offer);
     }
 }

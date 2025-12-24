@@ -1,11 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Skill;
 import java.util.List;
+import com.example.demo.model.Skill;
 
 public interface SkillService {
 
-    Skill get(Long id);
+    Skill createSkill(Skill skill);
 
-    List<Skill> list();
+    Skill updateSkill(Long id, Skill skill);
+
+    Skill getSkillById(Long id);
+
+    List<Skill> getAllSkills();
+
+    void deactivateSkill(Long id);
 }

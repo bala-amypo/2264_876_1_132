@@ -1,37 +1,63 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity
 public class SkillRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private UserProfile user;
-
-    @ManyToOne
     private Skill skill;
+    private UserProfile requester;
+    private boolean active;
+    private LocalDateTime createdAt;
 
-    private String urgencyLevel;
-    private Boolean active = true;
+    public SkillRequest() {
+    }
 
-    public SkillRequest() {}
+    public SkillRequest(Long id, Skill skill, UserProfile requester, boolean active, LocalDateTime createdAt) {
+        this.id = id;
+        this.skill = skill;
+        this.requester = requester;
+        this.active = active;
+        this.createdAt = createdAt;
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public UserProfile getUser() { return user; }
-    public void setUser(UserProfile user) { this.user = user; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Skill getSkill() { return skill; }
-    public void setSkill(Skill skill) { this.skill = skill; }
+    public Skill getSkill() {
+        return skill;
+    }
 
-    public String getUrgencyLevel() { return urgencyLevel; }
-    public void setUrgencyLevel(String urgencyLevel) { this.urgencyLevel = urgencyLevel; }
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public UserProfile getRequester() {
+        return requester;
+    }
+
+    public void setRequester(UserProfile requester) {
+        this.requester = requester;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

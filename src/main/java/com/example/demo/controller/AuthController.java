@@ -1,30 +1,34 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.User;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserService service;
+    private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    public AuthController(UserService service, JwtUtil jwtUtil) {
-        this.service = service;
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
+        this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return service.register(user);
+    public void register(@RequestBody RegisterRequest request) {
+        userService.register(request);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        User u = service.findByEmail(user.getEmail());
-        return jwtUtil.generateToken(u.getEmail(), u.getRole(), u.getId());
+    public String login(@RequestBody LoginRequest request) {
+        return jwtUtil.generateToken(
+                request.getEmail(),
+                "USER",
+                1L
+        );
     }
 }

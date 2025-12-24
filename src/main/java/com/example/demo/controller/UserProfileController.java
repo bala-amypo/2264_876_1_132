@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import com.example.demo.model.UserProfile;
 import com.example.demo.service.UserProfileService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -16,28 +17,27 @@ public class UserProfileController {
     }
 
     @PostMapping
-    public UserProfile create(@RequestBody UserProfile user) {
+    public UserProfile createUser(@RequestBody UserProfile user) {
         return service.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public UserProfile update(@PathVariable Long id, @RequestBody UserProfile user) {
-        user.setId(id);
-        return service.createUser(user);
+    public UserProfile updateUser(@PathVariable Long id, @RequestBody UserProfile user) {
+        return service.updateUser(id, user);
     }
 
     @GetMapping("/{id}")
-    public UserProfile getById(@PathVariable Long id) {
+    public UserProfile getUserById(@PathVariable Long id) {
         return service.getUserById(id);
     }
 
     @GetMapping
-    public List<UserProfile> getAll() {
+    public List<UserProfile> getAllUsers() {
         return service.getAllUsers();
     }
 
     @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
+    public void deactivateUser(@PathVariable Long id) {
         service.deactivateUser(id);
     }
 }

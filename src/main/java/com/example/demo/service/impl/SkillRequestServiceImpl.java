@@ -1,3 +1,12 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.model.SkillRequest;
+import com.example.demo.repository.SkillRequestRepository;
+import com.example.demo.service.SkillRequestService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class SkillRequestServiceImpl implements SkillRequestService {
 
@@ -14,26 +23,25 @@ public class SkillRequestServiceImpl implements SkillRequestService {
 
     @Override
     public SkillRequest updateRequest(Long id, SkillRequest request) {
-        SkillRequest existing = getRequestById(id);
-        existing.setUrgencyLevel(request.getUrgencyLevel());
-        return repository.save(existing);
-    }
-
-    @Override
-    public SkillRequest getRequestById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Skill not found"));
+        SkillRequest existing = repository.findById(id).orElse(null);
+        if (existing != null) {
+            existing.setSkillName(request.getSkillName());
+            return repository.save(existing);
+        }
+        return null;
     }
 
     @Override
     public List<SkillRequest> getRequestsByUser(Long userId) {
-        return repository.findAll();
+        return repository.findByUserId(userId);
     }
 
     @Override
     public void deactivateRequest(Long id) {
-        SkillRequest request = getRequestById(id);
-        request.setActive(false);
-        repository.save(request);
+        SkillRequest req = repository.findById(id).orElse(null);
+        if (req != null) {
+            req.setActive(false);
+            repository.save(req);
+        }
     }
 }

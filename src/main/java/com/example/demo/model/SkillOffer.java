@@ -17,10 +17,23 @@ public class SkillOffer {
     @ManyToOne
     private UserProfile user;
 
-    public void setExperienceLevel(String e) { this.experienceLevel = e; }
-    public void setSkill(Skill skill) { this.skill = skill; }
-    public void setUser(UserProfile user) { this.user = user; }
+    public void setExperienceLevel(String experienceLevel) {
+        this.experienceLevel = experienceLevel;
+    }
 
-    public Skill getSkill() { return skill; }
-    public UserProfile getUser() { return user; }
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public void setUser(UserProfile user) {
+        this.user = user;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public UserProfile getUser() {
+        return user;
+    }
 }

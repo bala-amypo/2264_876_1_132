@@ -21,9 +21,19 @@ public class MatchRecord {
     @ManyToOne
     private Skill skillOfferedByB;
 
-    public void setUserA(UserProfile u) { this.userA = u; }
-    public void setUserB(UserProfile u) { this.userB = u; }
+    public void setUserA(UserProfile userA) {
+        this.userA = userA;
+    }
 
-    public void setSkillOfferedByA(Skill s) { this.skillOfferedByA = s; }
-    public void setSkillOfferedByB(Skill s) { this.skillOfferedByB = s; }
+    public void setUserB(UserProfile userB) {
+        this.userB = userB;
+    }
+
+    public void setSkillOfferedByA(Skill skill) {
+        this.skillOfferedByA = skill;
+    }
+
+    public void setSkillOfferedByB(Skill skill) {
+        this.skillOfferedByB = skill;
+    }
 }

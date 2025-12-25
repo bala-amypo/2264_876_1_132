@@ -1,3 +1,8 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.SkillOffer;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/offers")
 public class SkillOfferController {

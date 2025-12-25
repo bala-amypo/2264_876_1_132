@@ -15,9 +15,19 @@ public class SkillRequest {
     @ManyToOne
     private UserProfile user;
 
-    public void setSkill(Skill skill) { this.skill = skill; }
-    public void setUser(UserProfile user) { this.user = user; }
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
 
-    public Skill getSkill() { return skill; }
-    public UserProfile getUser() { return user; }
+    public void setUser(UserProfile user) {
+        this.user = user;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public UserProfile getUser() {
+        return user;
+    }
 }

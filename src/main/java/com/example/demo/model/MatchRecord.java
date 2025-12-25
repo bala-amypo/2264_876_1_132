@@ -6,6 +6,7 @@ public class MatchRecord {
     private UserProfile userB;
     private Skill skillOfferedByA;
     private Skill skillOfferedByB;
+    private String status;   // ✅ ADD
 
     public UserProfile getUserA() {
         return userA;
@@ -37,5 +38,14 @@ public class MatchRecord {
 
     public void setSkillOfferedByB(Skill skillOfferedByB) {
         this.skillOfferedByB = skillOfferedByB;
+    }
+
+    // ✅ REQUIRED
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

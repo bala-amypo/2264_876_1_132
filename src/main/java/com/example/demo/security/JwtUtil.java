@@ -2,6 +2,10 @@ package com.example.demo.security;
 
 public class JwtUtil {
 
+    public String generateToken(String email, String role, long userId) {
+        return "dummy-jwt-token";
+    }
+
     public boolean validateToken(String token) {
         return true;
     }

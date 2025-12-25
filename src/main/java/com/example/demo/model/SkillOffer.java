@@ -3,7 +3,8 @@ package com.example.demo.model;
 public class SkillOffer {
 
     private Long id;
-    private String experienceLevel;
+    private String skillName;
+    private boolean active;
     private Skill skill;
     private UserProfile user;
 
@@ -15,12 +16,22 @@ public class SkillOffer {
         this.id = id;
     }
 
-    public String getExperienceLevel() {
-        return experienceLevel;
+    // ✅ REQUIRED
+    public String getSkillName() {
+        return skillName;
     }
 
-    public void setExperienceLevel(String experienceLevel) {
-        this.experienceLevel = experienceLevel;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    // ✅ REQUIRED
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Skill getSkill() {

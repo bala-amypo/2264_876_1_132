@@ -17,6 +17,14 @@ public class MatchmakingServiceImpl implements MatchmakingService {
     }
 
     @Override
+    public MatchRecord generateMatch(Long userId) {
+        MatchRecord match = new MatchRecord();
+        match.setUserId(userId);
+        match.setStatus("PENDING");
+        return repository.save(match);
+    }
+
+    @Override
     public MatchRecord getMatchById(Long id) {
         return repository.findById(id).orElse(null);
     }

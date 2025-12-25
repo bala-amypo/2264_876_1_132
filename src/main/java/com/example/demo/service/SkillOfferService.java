@@ -1,8 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.model.SkillOffer;
+import java.util.List;
 
 public interface SkillOfferService {
+
     SkillOffer createOffer(SkillOffer offer);
-    SkillOffer getOfferById(Long id);
+    SkillOffer updateOffer(Long id, SkillOffer offer);
+    List<SkillOffer> getOffersByUser(Long userId);
+    void deactivateOffer(Long id);
 }

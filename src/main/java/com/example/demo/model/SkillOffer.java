@@ -3,53 +3,30 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "skill_offers")
 public class SkillOffer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private UserProfile user;
-
-    @ManyToOne
-    private Skill skill;
-
-    private String experienceLevel;
-    private Integer availableHoursPerWeek;
-    private Boolean active = true;
+    private Long userId;
+    private String skillName;
+    private boolean active = true;
 
     public SkillOffer() {}
 
-    public SkillOffer(Long id, UserProfile user, Skill skill,
-                      String experienceLevel, Integer availableHoursPerWeek,
-                      Boolean active) {
-        this.id = id;
-        this.user = user;
-        this.skill = skill;
-        this.experienceLevel = experienceLevel;
-        this.availableHoursPerWeek = availableHoursPerWeek;
-        this.active = active;
+    public SkillOffer(Long userId, String skillName) {
+        this.userId = userId;
+        this.skillName = skillName;
     }
 
     public Long getId() { return id; }
+    public Long getUserId() { return userId; }
+    public String getSkillName() { return skillName; }
+    public boolean isActive() { return active; }
+
     public void setId(Long id) { this.id = id; }
-
-    public UserProfile getUser() { return user; }
-    public void setUser(UserProfile user) { this.user = user; }
-
-    public Skill getSkill() { return skill; }
-    public void setSkill(Skill skill) { this.skill = skill; }
-
-    public String getExperienceLevel() { return experienceLevel; }
-    public void setExperienceLevel(String experienceLevel) { this.experienceLevel = experienceLevel; }
-
-    public Integer getAvailableHoursPerWeek() { return availableHoursPerWeek; }
-    public void setAvailableHoursPerWeek(Integer availableHoursPerWeek) {
-        this.availableHoursPerWeek = availableHoursPerWeek;
-    }
-
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public void setUserId(Long userId) { this.userId = userId; }
+    public void setSkillName(String skillName) { this.skillName = skillName; }
+    public void setActive(boolean active) { this.active = active; }
 }

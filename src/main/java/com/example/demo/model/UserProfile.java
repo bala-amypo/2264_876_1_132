@@ -1,35 +1,23 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.sql.Timestamp;
 
-@Entity
 public class UserProfile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    private String username;
-    private String email;   // ✅ ADD THIS
-    private String bio;
-    private boolean active;
-
-    public UserProfile() {
-    }
-
+    // ✅ REQUIRED
     public Long getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    // ✅ THIS FIXES THE ERROR
     public String getEmail() {
         return email;
     }
@@ -38,19 +26,19 @@ public class UserProfile {
         this.email = email;
     }
 
-    public String getBio() {
-        return bio;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public boolean isActive() {
-        return active;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

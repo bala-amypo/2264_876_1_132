@@ -1,11 +1,13 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
 @Entity
 public class SkillOffer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String experienceLevel;
 
     @ManyToOne
     private UserProfile user;
@@ -13,10 +15,24 @@ public class SkillOffer {
     @ManyToOne
     private Skill skill;
 
-    public void setExperienceLevel(String e) { this.experienceLevel = e; }
-    public void setUser(UserProfile u) { this.user = u; }
-    public void setSkill(Skill s) { this.skill = s; }
+    public SkillOffer() {
+    }
 
-    public UserProfile getUser() { return user; }
-    public Skill getSkill() { return skill; }
+    public SkillOffer(Long id, UserProfile user, Skill skill) {
+        this.id = id;
+        this.user = user;
+        this.skill = skill;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserProfile getUser() {
+        return user;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
 }

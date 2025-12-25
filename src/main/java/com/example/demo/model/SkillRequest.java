@@ -1,37 +1,41 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class SkillRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String skillName;
-    private boolean active;
-
-    public SkillRequest() {
-    }
+    private String urgencyLevel;
+    private Skill skill;
+    private UserProfile user;
 
     public Long getId() {
         return id;
     }
 
-    public String getSkillName() {
-        return skillName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public String getUrgencyLevel() {
+        return urgencyLevel;
     }
 
-    public boolean isActive() {
-        return active;
+    public void setUrgencyLevel(String urgencyLevel) {
+        this.urgencyLevel = urgencyLevel;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public UserProfile getUser() {
+        return user;
+    }
+
+    public void setUser(UserProfile user) {
+        this.user = user;
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.model;
 public class Skill {
 
     private Long id;
+    private String name;        // ✅ ADD
     private String category;
     private boolean active;
 
@@ -14,6 +15,15 @@ public class Skill {
         this.id = id;
     }
 
+    // ✅ REQUIRED
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -22,7 +32,6 @@ public class Skill {
         this.category = category;
     }
 
-    // ✅ REQUIRED
     public boolean isActive() {
         return active;
     }

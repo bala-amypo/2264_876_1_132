@@ -32,13 +32,18 @@ public class SkillRequestServiceImpl implements SkillRequestService {
     }
 
     @Override
+    public SkillRequest getRequestById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<SkillRequest> getRequestsByUser(Long userId) {
         return repository.findByUserId(userId);
     }
 
     @Override
     public void deactivateRequest(Long id) {
-        SkillRequest req = repository.findById(id).orElse(null);
+        SkillRequest req = getRequestById(id);
         if (req != null) {
             req.setActive(false);
             repository.save(req);

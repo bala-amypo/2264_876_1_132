@@ -7,6 +7,7 @@ public interface SkillOfferService {
 
     SkillOffer createOffer(SkillOffer offer);
     SkillOffer updateOffer(Long id, SkillOffer offer);
+    SkillOffer getOfferById(Long id);     // 🔥 ADD THIS
     List<SkillOffer> getOffersByUser(Long userId);
     void deactivateOffer(Long id);
 }

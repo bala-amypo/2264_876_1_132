@@ -23,12 +23,17 @@ public class SkillOfferServiceImpl implements SkillOfferService {
 
     @Override
     public SkillOffer updateOffer(Long id, SkillOffer offer) {
-        Skill existing = repository.findById(id).orElse(null);
+        SkillOffer existing = repository.findById(id).orElse(null);
         if (existing != null) {
             existing.setSkillName(offer.getSkillName());
             return repository.save(existing);
         }
         return null;
+    }
+
+    @Override
+    public SkillOffer getOfferById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -38,7 +43,7 @@ public class SkillOfferServiceImpl implements SkillOfferService {
 
     @Override
     public void deactivateOffer(Long id) {
-        SkillOffer offer = repository.findById(id).orElse(null);
+        SkillOffer offer = getOfferById(id);
         if (offer != null) {
             offer.setActive(false);
             repository.save(offer);

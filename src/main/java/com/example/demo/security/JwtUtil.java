@@ -9,31 +9,34 @@ public class JwtUtil {
 
     private static final String SECRET = "secret-key";
 
-    // Used by AuthController
-    public String generateToken(String email, String role, long expirationTime) {
-        String tokenData = email + ":" + role + ":" + expirationTime + ":" + SECRET;
+    public String generateToken(String email, String role, long userId) {
+        String tokenData = email + ":" + role + ":" + userId + ":" + SECRET;
         return Base64.getEncoder().encodeToString(tokenData.getBytes());
     }
 
-    // ✅ REQUIRED BY TEST CLASS
-    public String extractUserId(String token) {
+    public String extractEmail(String token) {
         try {
             String decoded = new String(Base64.getDecoder().decode(token));
-            return decoded.split(":")[0]; // email as userId
+            return decoded.split(":")[0];
         } catch (Exception e) {
             return null;
         }
-    }
-
-    // Used by JwtAuthFilter
-    public String extractEmail(String token) {
-        return extractUserId(token);
     }
 
     public String extractRole(String token) {
         try {
             String decoded = new String(Base64.getDecoder().decode(token));
             return decoded.split(":")[1];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // ✅ FIXED METHOD
+    public Long extractUserId(String token) {
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return Long.valueOf(decoded.split(":")[2]); // <-- CORRECT
         } catch (Exception e) {
             return null;
         }

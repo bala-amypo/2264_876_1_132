@@ -1,23 +1,22 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 
-@Component
 public class JwtUtil {
 
-    public boolean validateToken(String token) {
-        return true;
-    }
+    private static final String SECRET_KEY = "secret123";
 
-    public String extractEmail(String token) {
-        return "test@test.com";
-    }
+    // ✅ THIS METHOD FIXES THE ERROR
+    public String generateToken(String username, String role, long expirationMillis) {
 
-    public String extractRole(String token) {
-        return "USER";
-    }
-
-    public Long extractUserId(String token) {
-        return 1L;
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
 }

@@ -9,30 +9,29 @@ public class SkillOffer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private UserProfile user;
-
-    @ManyToOne
-    private Skill skill;
+    private String skillName;
+    private boolean active;
 
     public SkillOffer() {
-    }
-
-    public SkillOffer(Long id, UserProfile user, Skill skill) {
-        this.id = id;
-        this.user = user;
-        this.skill = skill;
     }
 
     public Long getId() {
         return id;
     }
 
-    public UserProfile getUser() {
-        return user;
+    public String getSkillName() {
+        return skillName;
     }
 
-    public Skill getSkill() {
-        return skill;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

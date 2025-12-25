@@ -1,24 +1,37 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
 @Entity
 public class MatchRecord {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private UserProfile userA;
+    private Long userId;
+    private String status;
 
-    @ManyToOne
-    private UserProfile userB;
+    public MatchRecord() {
+    }
 
-    @ManyToOne
-    private Skill skillOfferedByA;
+    public Long getId() {
+        return id;
+    }
 
-    @ManyToOne
-    private Skill skillOfferedByB;
+    public Long getUserId() {
+        return userId;
+    }
 
-    public void setUserA(UserProfile u) { this.userA = u; }
-    public void setUserB(UserProfile u) { this.userB = u; }
-    public void setSkillOfferedByA(Skill s) { this.skillOfferedByA = s; }
-    public void setSkillOfferedByB(Skill s) { this.skillOfferedByB = s; }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

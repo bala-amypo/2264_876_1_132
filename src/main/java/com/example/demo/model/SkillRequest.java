@@ -1,33 +1,19 @@
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-
 @Entity
 public class SkillRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    private Skill skill;
 
     @ManyToOne
     private UserProfile user;
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
+    @ManyToOne
+    private Skill skill;
 
-    public void setUser(UserProfile user) {
-        this.user = user;
-    }
+    public void setUser(UserProfile u) { this.user = u; }
+    public void setSkill(Skill s) { this.skill = s; }
 
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public UserProfile getUser() {
-        return user;
-    }
+    public UserProfile getUser() { return user; }
+    public Skill getSkill() { return skill; }
 }

@@ -1,7 +1,3 @@
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-
 @Entity
 public class MatchRecord {
 
@@ -9,38 +5,31 @@ public class MatchRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;          
-    private String status;
+    @ManyToOne
+    private UserProfile userA;
 
-    public MatchRecord() {
+    @ManyToOne
+    private UserProfile userB;
+
+    @ManyToOne
+    private Skill skillOfferedByA;
+
+    @ManyToOne
+    private Skill skillOfferedByB;
+
+    public void setUserA(UserProfile userA) {
+        this.userA = userA;
     }
 
-    public MatchRecord(Long userId, String status) {
-        this.userId = userId;
-        this.status = status;
+    public void setUserB(UserProfile userB) {
+        this.userB = userB;
     }
 
-    public Long getId() {
-        return id;
+    public void setSkillOfferedByA(Skill skill) {
+        this.skillOfferedByA = skill;
     }
 
-    public Long getUserId() {     
-        return userId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUserId(Long userId) {   // 🔥 ADD THIS
-        this.userId = userId;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSkillOfferedByB(Skill skill) {
+        this.skillOfferedByB = skill;
     }
 }

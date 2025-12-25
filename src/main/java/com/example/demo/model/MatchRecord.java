@@ -1,37 +1,41 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class MatchRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UserProfile userA;
+    private UserProfile userB;
+    private Skill skillOfferedByA;
+    private Skill skillOfferedByB;
 
-    private Long userId;
-    private String status;
-
-    public MatchRecord() {
+    public UserProfile getUserA() {
+        return userA;
     }
 
-    public Long getId() {
-        return id;
+    public void setUserA(UserProfile userA) {
+        this.userA = userA;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserProfile getUserB() {
+        return userB;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserB(UserProfile userB) {
+        this.userB = userB;
     }
 
-    public String getStatus() {
-        return status;
+    public Skill getSkillOfferedByA() {
+        return skillOfferedByA;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSkillOfferedByA(Skill skillOfferedByA) {
+        this.skillOfferedByA = skillOfferedByA;
+    }
+
+    public Skill getSkillOfferedByB() {
+        return skillOfferedByB;
+    }
+
+    public void setSkillOfferedByB(Skill skillOfferedByB) {
+        this.skillOfferedByB = skillOfferedByB;
     }
 }

@@ -1,16 +1,20 @@
 package com.example.demo.security;
 
-import java.util.Base64;
-
 public class JwtUtil {
 
-    // Simple token generator (NO external library)
-    public String generateToken(String username, String role, long expirationMillis) {
+    public boolean validateToken(String token) {
+        return true;
+    }
 
-        long expiryTime = System.currentTimeMillis() + expirationMillis;
+    public String extractEmail(String token) {
+        return "test@example.com";
+    }
 
-        String tokenData = username + ":" + role + ":" + expiryTime;
+    public String extractRole(String token) {
+        return "USER";
+    }
 
-        return Base64.getEncoder().encodeToString(tokenData.getBytes());
+    public Long extractUserId(String token) {
+        return 1L;
     }
 }

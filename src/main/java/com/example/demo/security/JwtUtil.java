@@ -1,22 +1,16 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.Date;
+import java.util.Base64;
 
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "secret123";
-
-    // ✅ THIS METHOD FIXES THE ERROR
+    // Simple token generator (NO external library)
     public String generateToken(String username, String role, long expirationMillis) {
 
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("role", role)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
+        long expiryTime = System.currentTimeMillis() + expirationMillis;
+
+        String tokenData = username + ":" + role + ":" + expiryTime;
+
+        return Base64.getEncoder().encodeToString(tokenData.getBytes());
     }
 }

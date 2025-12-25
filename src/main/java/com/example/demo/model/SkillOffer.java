@@ -1,3 +1,7 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
 @Entity
 public class SkillOffer {
 
@@ -13,20 +17,10 @@ public class SkillOffer {
     @ManyToOne
     private UserProfile user;
 
-    // getters & setters
-    public void setExperienceLevel(String experienceLevel) {
-        this.experienceLevel = experienceLevel;
-    }
+    public void setExperienceLevel(String e) { this.experienceLevel = e; }
+    public void setSkill(Skill skill) { this.skill = skill; }
+    public void setUser(UserProfile user) { this.user = user; }
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
-
-    public void setUser(UserProfile user) {
-        this.user = user;
-    }
-
-    public UserProfile getUser() {
-        return user;
-    }
+    public Skill getSkill() { return skill; }
+    public UserProfile getUser() { return user; }
 }

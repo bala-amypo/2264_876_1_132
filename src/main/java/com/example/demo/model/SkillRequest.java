@@ -1,7 +1,3 @@
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-
 @Entity
 public class SkillRequest {
 
@@ -9,25 +5,21 @@ public class SkillRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-    private String skillName;
-    private boolean active = true;
+    @ManyToOne
+    private Skill skill;
 
-    public SkillRequest() {}
+    @ManyToOne
+    private UserProfile user;
 
-    public SkillRequest(Long userId, String skillName) {
-        this.userId = userId;
-        this.skillName = skillName;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 
-    public Long getId() { return id; }
-    public Long getUserId() { return userId; }
-    public String getSkillName() { return skillName; }
-    public boolean isActive() { return active; }
+    public void setUser(UserProfile user) {
+        this.user = user;
+    }
 
-    public void setId(Long id) { this.id = id; }
-    public void setUserId(Long userId) { this.userId = userId; }
-    public void setSkillName(String skillName) { this.skillName = skillName; }
-    public void setActive(boolean active) { this.active = active; }
+    public UserProfile getUser() {
+        return user;
+    }
 }
-

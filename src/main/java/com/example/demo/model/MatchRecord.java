@@ -9,7 +9,7 @@ public class MatchRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;          // 🔥 ADD THIS
+    private Long userId;          
     private String status;
 
     public MatchRecord() {
@@ -24,7 +24,7 @@ public class MatchRecord {
         return id;
     }
 
-    public Long getUserId() {     // 🔥 ADD THIS
+    public Long getUserId() {     
         return userId;
     }
 

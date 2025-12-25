@@ -2,11 +2,21 @@ package com.example.demo.model;
 
 public class MatchRecord {
 
+    private Long userId;                 // ✅ ADD
     private UserProfile userA;
     private UserProfile userB;
     private Skill skillOfferedByA;
     private Skill skillOfferedByB;
-    private String status;   // ✅ ADD
+    private String status;
+
+    // ✅ REQUIRED BY MatchmakingServiceImpl
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public UserProfile getUserA() {
         return userA;
@@ -40,7 +50,6 @@ public class MatchRecord {
         this.skillOfferedByB = skillOfferedByB;
     }
 
-    // ✅ REQUIRED
     public String getStatus() {
         return status;
     }

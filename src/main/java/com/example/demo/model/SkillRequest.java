@@ -3,7 +3,8 @@ package com.example.demo.model;
 public class SkillRequest {
 
     private Long id;
-    private String urgencyLevel;
+    private String skillName;
+    private boolean active;
     private Skill skill;
     private UserProfile user;
 
@@ -15,12 +16,22 @@ public class SkillRequest {
         this.id = id;
     }
 
-    public String getUrgencyLevel() {
-        return urgencyLevel;
+    // ✅ REQUIRED
+    public String getSkillName() {
+        return skillName;
     }
 
-    public void setUrgencyLevel(String urgencyLevel) {
-        this.urgencyLevel = urgencyLevel;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    // ✅ REQUIRED
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Skill getSkill() {

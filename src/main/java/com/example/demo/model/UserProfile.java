@@ -1,15 +1,12 @@
 package com.example.demo.model;
 
-import java.sql.Timestamp;
-
 public class UserProfile {
 
     private Long id;
-    private String email;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private String username;
+    private String bio;
+    private boolean active;
 
-    // ✅ REQUIRED
     public Long getId() {
         return id;
     }
@@ -18,27 +15,30 @@ public class UserProfile {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    // ✅ REQUIRED
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    // ✅ REQUIRED
+    public String getBio() {
+        return bio;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    // ✅ REQUIRED
+    public boolean isActive() {
+        return active;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

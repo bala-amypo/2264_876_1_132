@@ -1,29 +1,33 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.UserProfile;
+import com.example.demo.service.UserProfileService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
 
 @RestController
 @RequestMapping("/users")
 public class UserProfileController {
 
+    private final UserProfileService userProfileService;
+
+    public UserProfileController(UserProfileService userProfileService) {
+        this.userProfileService = userProfileService;
+    }
+
     @PostMapping
-    public UserProfile create(@RequestBody UserProfile u) {
-        return u;
+    public ResponseEntity<UserProfile> create(@RequestBody UserProfile profile) {
+        return ResponseEntity.ok(userProfileService.createUser(profile));
     }
 
     @GetMapping("/{id}")
-    public UserProfile get(@PathVariable Long id) {
-        return new UserProfile();
+    public ResponseEntity<UserProfile> get(@PathVariable Long id) {
+        return ResponseEntity.ok(userProfileService.getUserById(id));
     }
 
-    @PutMapping("/deactivate/{id}")
-    public void deactivate(@PathVariable Long id) {
-    }
-
-    @GetMapping
-    public List<UserProfile> list() {
-        return new ArrayList<>();
+    @PutMapping("/{id}/deactivate")
+    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+        userProfileService.deactivateUser(id);
+        return ResponseEntity.ok().build();
     }
 }

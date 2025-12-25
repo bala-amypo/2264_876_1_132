@@ -1,52 +1,39 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "skill_requests")
 public class SkillRequest {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String skillName;
-    private boolean active;
-    private Skill skill;
+
+    private String urgencyLevel;
+    private boolean active = true;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserProfile user;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "skill_id")
+    private Skill skill;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    // ✅ REQUIRED
-    public String getSkillName() {
-        return skillName;
-    }
+    public String getUrgencyLevel() { return urgencyLevel; }
+    public void setUrgencyLevel(String urgencyLevel) { this.urgencyLevel = urgencyLevel; }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
-    }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
-    // ✅ REQUIRED
-    public boolean isActive() {
-        return active;
-    }
+    public UserProfile getUser() { return user; }
+    public void setUser(UserProfile user) { this.user = user; }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
-
-    public UserProfile getUser() {
-        return user;
-    }
-
-    public void setUser(UserProfile user) {
-        this.user = user;
-    }
+    public Skill getSkill() { return skill; }
+    public void setSkill(Skill skill) { this.skill = skill; }
 }

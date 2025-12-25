@@ -1,25 +1,29 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Skill;
+import com.example.demo.service.SkillService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/skills")
 public class SkillController {
 
-    @PostMapping
-    public Skill create(@RequestBody Skill s) {
-        return s;
+    private final SkillService skillService;
+
+    public SkillController(SkillService skillService) {
+        this.skillService = skillService;
     }
 
     @PutMapping("/{id}")
-    public Skill update(@PathVariable Long id, @RequestBody Skill s) {
-        return s;
+    public ResponseEntity<Skill> update(@PathVariable Long id, @RequestBody Skill skill) {
+        return ResponseEntity.ok(skillService.updateSkill(id, skill));
     }
 
     @GetMapping
-    public List<Skill> list() {
-        return new ArrayList<>();
+    public ResponseEntity<List<Skill>> list() {
+        return ResponseEntity.ok(skillService.getAllSkills());
     }
 }

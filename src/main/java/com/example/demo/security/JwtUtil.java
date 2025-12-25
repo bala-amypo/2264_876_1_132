@@ -1,60 +1,48 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
-import java.security.Key;
-import java.util.Date;
+import java.util.Base64;
 
+@Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "mysecretkeymysecretkeymysecretkey12";
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
+    private static final String SECRET = "secret-key";
 
-    private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    // ✅ Method REQUIRED by AuthController
+    public String generateToken(String email, String role, long expirationTime) {
+
+        String tokenData = email + ":" + role + ":" + expirationTime + ":" + SECRET;
+        return Base64.getEncoder().encodeToString(tokenData.getBytes());
     }
 
-    public String generateToken(String email, String role, Long userId) {
-        return Jwts.builder()
-                .setSubject(email)
-                .claim("role", role)
-                .claim("userId", userId)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    public boolean validateToken(String token) {
+    // Extract email
+    public String extractEmail(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.split(":")[0];
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 
-    public String extractEmail(String token) {
-        return extractClaims(token).getSubject();
-    }
-
+    // Extract role (optional but useful)
     public String extractRole(String token) {
-        return extractClaims(token).get("role", String.class);
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.split(":")[1];
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public Long extractUserId(String token) {
-        return extractClaims(token).get("userId", Long.class);
-    }
-
-    private Claims extractClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+    // Validate token
+    public boolean validateToken(String token) {
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.endsWith(":" + SECRET);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

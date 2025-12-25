@@ -6,8 +6,8 @@ import java.util.List;
 public interface SkillRequestService {
 
     SkillRequest createRequest(SkillRequest request);
-    SkillRequest updateRequest(Long id, SkillRequest request);
-    SkillRequest getRequestById(Long id);    // 🔥 ADD THIS
+
+    SkillRequest getRequestById(Long id);
+
     List<SkillRequest> getRequestsByUser(Long userId);
-    void deactivateRequest(Long id);
 }

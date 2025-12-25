@@ -4,6 +4,7 @@ public class UserProfile {
 
     private Long id;
     private String username;
+    private String email;   // ✅ ADD THIS
     private String bio;
     private boolean active;
 
@@ -15,7 +16,6 @@ public class UserProfile {
         this.id = id;
     }
 
-    // ✅ REQUIRED
     public String getUsername() {
         return username;
     }
@@ -24,7 +24,15 @@ public class UserProfile {
         this.username = username;
     }
 
-    // ✅ REQUIRED
+    // ✅ REQUIRED BY SERVICE
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getBio() {
         return bio;
     }
@@ -33,7 +41,6 @@ public class UserProfile {
         this.bio = bio;
     }
 
-    // ✅ REQUIRED
     public boolean isActive() {
         return active;
     }

@@ -11,8 +11,8 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 
-    private final Key key = Keys.hmacShaKeyFor(
-            "mysecretkeymysecretkeymysecretkey".getBytes());
+    private final Key key =
+            Keys.hmacShaKeyFor("mysecretkeymysecretkeymysecretkey".getBytes());
 
     public String generateToken(String email) {
         return Jwts.builder()

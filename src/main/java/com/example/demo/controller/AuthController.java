@@ -5,8 +5,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.dto.AuthResponse;
 import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.LoginResponse;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.AppUser;
 import com.example.demo.repository.UserRepository;
@@ -46,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public LoginResponse login(@RequestBody LoginRequest request) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -55,7 +55,14 @@ public class AuthController {
                 )
         );
 
-        String token = jwtUtil.generateToken(request.getEmail());
-        return new AuthResponse(token);
+        AppUser user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getRole(),
+                user.getId()
+        );
+
+        return new LoginResponse(token);
     }
 }

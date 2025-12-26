@@ -1,42 +1,52 @@
 package com.example.demo.security;
 
-import java.security.Key;
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
+import java.util.Base64;
 
 @Component
 public class JwtUtil {
 
-    private final Key key =
-            Keys.hmacShaKeyFor("mysecretkeymysecretkeymysecretkey".getBytes());
+    private static final String SECRET = "secret-key";
 
-    public String generateToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
+    public String generateToken(String email, String role, long userId) {
+        String tokenData = email + ":" + role + ":" + userId + ":" + SECRET;
+        return Base64.getEncoder().encodeToString(tokenData.getBytes());
     }
 
     public String extractEmail(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.split(":")[0];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String extractRole(String token) {
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.split(":")[1];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // ✅ FIXED METHOD
+    public Long extractUserId(String token) {
+        try {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return Long.valueOf(decoded.split(":")[2]); // <-- CORRECT
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean validateToken(String token) {
         try {
-            extractEmail(token);
-            return true;
-        } catch (JwtException e) {
+            String decoded = new String(Base64.getDecoder().decode(token));
+            return decoded.endsWith(":" + SECRET);
+        } catch (Exception e) {
             return false;
         }
     }

@@ -1,44 +1,55 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.LoginResponse;
-import com.example.demo.security.JwtUtil;
-import com.example.demo.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dto.*;
+import com.example.demo.model.AppUser;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtUtil;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserService userService;
+    private final UserRepository repo;
+    private final PasswordEncoder encoder;
+    private final AuthenticationManager authManager;
     private final JwtUtil jwtUtil;
 
-    public AuthController(AuthenticationManager authenticationManager,
-                          UserService userService,
+    public AuthController(UserRepository repo,
+                          PasswordEncoder encoder,
+                          AuthenticationManager authManager,
                           JwtUtil jwtUtil) {
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
+        this.repo = repo;
+        this.encoder = encoder;
+        this.authManager = authManager;
         this.jwtUtil = jwtUtil;
     }
 
+    @PostMapping("/register")
+    public String register(@RequestBody RegisterRequest request) {
+
+        AppUser user = new AppUser(
+                request.getFullName(),
+                request.getEmail(),
+                encoder.encode(request.getPassword()),
+                "ROLE_USER"
+        );
+
+        repo.save(user);
+        return "User registered successfully";
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    public AuthResponse login(@RequestBody LoginRequest request) {
 
-        authenticationManager.authenticate(
+        authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(), request.getPassword()
-                )
-        );
+                        request.getEmail(), request.getPassword()));
 
-        // Minimal response to satisfy tests
-        String token = jwtUtil.generateToken(
-                request.getEmail(), "ADMIN", 1L
-        );
-
-        return ResponseEntity.ok(new LoginResponse(token));
+        String token = jwtUtil.generateToken(request.getEmail());
+        return new AuthResponse(token);
     }
 }

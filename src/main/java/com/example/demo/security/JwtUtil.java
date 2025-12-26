@@ -1,53 +1,32 @@
 package com.example.demo.security;
 
+import java.util.Date;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET = "secret-key";
+    private final String SECRET_KEY = "secret123";
 
-    public String generateToken(String email, String role, long userId) {
-        String tokenData = email + ":" + role + ":" + userId + ":" + SECRET;
-        return Base64.getEncoder().encodeToString(tokenData.getBytes());
+    public String generateToken(UserDetails userDetails) {
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
 
-    public String extractEmail(String token) {
-        try {
-            String decoded = new String(Base64.getDecoder().decode(token));
-            return decoded.split(":")[0];
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public String extractRole(String token) {
-        try {
-            String decoded = new String(Base64.getDecoder().decode(token));
-            return decoded.split(":")[1];
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    // ✅ FIXED METHOD
-    public Long extractUserId(String token) {
-        try {
-            String decoded = new String(Base64.getDecoder().decode(token));
-            return Long.valueOf(decoded.split(":")[2]); // <-- CORRECT
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public boolean validateToken(String token) {
-        try {
-            String decoded = new String(Base64.getDecoder().decode(token));
-            return decoded.endsWith(":" + SECRET);
-        } catch (Exception e) {
-            return false;
-        }
+    public String extractUsername(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }

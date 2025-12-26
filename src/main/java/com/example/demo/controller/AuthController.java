@@ -18,8 +18,10 @@ public class AuthController {
     private final AuthenticationManager authManager;
     private final JwtUtil jwtUtil;
 
-    public AuthController(UserRepository repo, PasswordEncoder encoder,
-                          AuthenticationManager authManager, JwtUtil jwtUtil) {
+    public AuthController(UserRepository repo,
+                          PasswordEncoder encoder,
+                          AuthenticationManager authManager,
+                          JwtUtil jwtUtil) {
         this.repo = repo;
         this.encoder = encoder;
         this.authManager = authManager;
@@ -28,18 +30,21 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
+
         AppUser user = new AppUser(
                 request.getFullName(),
                 request.getEmail(),
                 encoder.encode(request.getPassword()),
                 "ROLE_USER"
         );
+
         repo.save(user);
-        return "User registered";
+        return "User registered successfully";
     }
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
+
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(), request.getPassword()));

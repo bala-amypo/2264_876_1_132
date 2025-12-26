@@ -4,32 +4,28 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String fullName;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
     private String password;
+    private String role;
 
-    @Column(nullable = false)
-    private String role; // ROLE_USER, ROLE_ADMIN
+    public AppUser() {}
 
-    public User() {}
-
-    public User(String fullName, String email, String password, String role) {
+    public AppUser(String fullName, String email, String password, String role) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    // getters & setters
+    public String getFullName() { return fullName; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public String getRole() { return role; }
 }

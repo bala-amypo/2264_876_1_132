@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.*;
-import com.example.demo.model.User;
+import com.example.demo.model.AppUser;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtUtil;
 
@@ -28,29 +28,23 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
-        User user = new User(
-                request.fullName,
-                request.email,
-                encoder.encode(request.password),
+        AppUser user = new AppUser(
+                request.getFullName(),
+                request.getEmail(),
+                encoder.encode(request.getPassword()),
                 "ROLE_USER"
         );
         repo.save(user);
-        return "User registered successfully";
+        return "User registered";
     }
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.email, request.password));
+                        request.getEmail(), request.getPassword()));
 
-        var userDetails = org.springframework.security.core.userdetails.User
-                .withUsername(request.email)
-                .password("")
-                .roles("USER")
-                .build();
-
-        String token = jwtUtil.generateToken(userDetails);
+        String token = jwtUtil.generateToken(request.getEmail());
         return new AuthResponse(token);
     }
 }

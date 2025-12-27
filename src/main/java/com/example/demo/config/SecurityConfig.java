@@ -48,7 +48,7 @@
 
 //         return http.build();
 //     }
-// }// swagger nivi maathi irukken
+// }
 package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;

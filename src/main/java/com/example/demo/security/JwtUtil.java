@@ -14,7 +14,7 @@ public class JwtUtil {
     private final Key key =
             Keys.hmacShaKeyFor("mysecretkeymysecretkeymysecretkey".getBytes());
 
-    // ===== REQUIRED BY TESTS =====
+    
     public String generateToken(String email, String role, long userId) {
         return Jwts.builder()
                 .setSubject(email)
@@ -26,7 +26,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    // ===== USED BY CONTROLLER =====
+
     public String generateToken(String email) {
         return generateToken(email, "ROLE_USER", 0L);
     }
@@ -34,8 +34,6 @@ public class JwtUtil {
     public String extractEmail(String token) {
         return parse(token).getSubject();
     }
-
-    // ===== REQUIRED BY TESTS =====
     public String extractRole(String token) {
         return parse(token).get("role", String.class);
     }
